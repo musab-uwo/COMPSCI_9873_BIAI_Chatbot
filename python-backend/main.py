@@ -165,11 +165,11 @@ def get_stocks():
 
 if __name__ == '__main__':
     #comment these lines later once the model is trained
-    assistant = ChatbotAssistant('intents.json', function_mappings = {'stocks': get_stocks})
-    assistant.parse_intents()
-    assistant.prepare_data()
-    assistant.train_model(batch_size=8, lr=0.001, epochs=100)
-    assistant.save_model('chatbot_model.pth', 'dimensions.json')
+    # assistant = ChatbotAssistant('intents.json', function_mappings = {'stocks': get_stocks})
+    # assistant.parse_intents()
+    # assistant.prepare_data()
+    # assistant.train_model(batch_size=8, lr=0.001, epochs=100)
+    # assistant.save_model('chatbot_model.pth', 'dimensions.json')
     #comment these lines later once the model is trained
 
     assistant = ChatbotAssistant('intents.json', function_mappings = {'stocks': get_stocks})
