@@ -1,6 +1,25 @@
 {
 	"intents": [
 		{
+			"tag": "email",
+			"patterns": [
+				"What is my email?", 
+				"Can you check my email?", 
+				"Show my inbox", 
+				"Do I have any new emails?", 
+				"Read my email", 
+				"Check my emails", 
+				"Send an email", 
+				"Can you help me with emails?", 
+				"How do I send an email?"
+			],
+			"responses": [
+				"I cannot access your email, but I can help you with tips on how to manage it!",
+				"Unfortunately, I can't read your email, but I can show you how to send one.",
+				"To send an email, you can use an email client like Gmail or Outlook."
+			]
+		},
+		{
 			"tag": "greeting",
 			"patterns": [
 				"Hi", 
