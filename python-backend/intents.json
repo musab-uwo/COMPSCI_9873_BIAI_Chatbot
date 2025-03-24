@@ -1,308 +1,406 @@
 {
-	"intents": [
-		{
-			"tag": "email",
-			"patterns": [
-				"What is my email?", 
-				"Can you check my email?", 
-				"Show my inbox", 
-				"Do I have any new emails?", 
-				"Read my email", 
-				"Check my emails", 
-				"Send an email", 
-				"Can you help me with emails?", 
-				"How do I send an email?"
-			],
-			"responses": [
-				"I cannot access your email, but I can help you with tips on how to manage it!",
-				"Unfortunately, I can't read your email, but I can show you how to send one.",
-				"To send an email, you can use an email client like Gmail or Outlook."
-			]
-		},
-		{
-			"tag": "greeting",
-			"patterns": [
-				"Hi", 
-				"How are you", 
-				"Is anyone there?", 
-				"Hello", 
-				"Good day", 
-				"Whats up", 
-				"Hey", 
-				"greetings", 
-				"Good morning", 
-				"Good afternoon", 
-				"Good evening", 
-				"Hi there", 
-				"Hey there", 
-				"Hiya", 
-				"Yo"
-			],
-			"responses": [
-				"Hello!", 
-				"Good to see you again!", 
-				"Hi there, how can I help?", 
-				"Hey! What can I do for you?", 
-				"Hi! How can I assist you today?"
-			]
-		},
-		{
-			"tag": "goodbye",
-			"patterns": [
-				"cya", 
-				"See you later", 
-				"Goodbye", 
-				"I am Leaving", 
-				"Have a Good day", 
-				"bye", 
-				"cao", 
-				"see ya", 
-				"Take care", 
-				"Bye bye", 
-				"See you soon", 
-				"Farewell", 
-				"Until next time"
-			],
-			"responses": [
-				"Sad to see you go :(", 
-				"Talk to you later", 
-				"Goodbye!", 
-				"Have a great day!", 
-				"See you next time!"
-			]
-		},
-		{
-			"tag": "programming",
-			"patterns": [
-				"What is programming?", 
-				"What is coding?", 
-				"Tell me about programming", 
-				"Tell me about coding", 
-				"What is software development?", 
-				"How does coding work?", 
-				"What do programmers do?", 
-				"Explain programming to me", 
-				"What is a programming language?"
-			],
-			"responses": [
-				"Programming, coding, or software development means writing computer code to automate tasks.", 
-				"Coding is the process of creating instructions for computers using programming languages.", 
-				"Programming involves writing code to solve problems and build software applications."
-			]
-		},
-		{
-			"tag": "resource",
-			"patterns": [
-				"Where can I learn to code?", 
-				"Best way to learn to code", 
-				"How can I learn programming", 
-				"Good programming resources", 
-				"Can you recommend good coding resources?", 
-				"Where should I start with coding?", 
-				"Best websites to learn programming", 
-				"Online coding courses", 
-				"Learn programming for free"
-			],
-			"responses": [
-				"Check out the NeuralNine YouTube channel and The Python Bible series (7 in 1).", 
-				"You can learn programming on platforms like Codecademy, freeCodeCamp, and Coursera.", 
-				"Start with free resources like W3Schools, Khan Academy, or edX."
-			]
-		},
-		{
-			"tag": "stocks",
-			"patterns": [
-				"What are my stocks?", 
-				"Which stocks do I own?", 
-				"Show my stock portfolio", 
-				"List my investments", 
-				"What stocks do I have?", 
-				"Tell me about my stocks", 
-				"Stock portfolio", 
-				"Investment portfolio"
-			],
-			"responses": [
-				"Here are your stocks!", 
-				"Your stock portfolio includes: AAPL, META, NVDA, GS, MSFT.", 
-				"Here’s a list of your investments."
-			]
-		},
-		{
-			"tag": "joke",
-			"patterns": [
-				"Tell me a joke", 
-				"Make me laugh", 
-				"Do you know any jokes?", 
-				"Say something funny", 
-				"Can you tell a joke?", 
-				"Give me a joke"
-			],
-			"responses": [
-				"Why don't scientists trust atoms? Because they make up everything!", 
-				"Why did the scarecrow win an award? Because he was outstanding in his field!", 
-				"Why don't skeletons fight each other? They don't have the guts."
-			]
-		},
-		{
-			"tag": "weather",
-			"patterns": [
-				"What's the weather like?", 
-				"How's the weather today?", 
-				"Tell me the weather", 
-				"Is it raining?", 
-				"Is it sunny?", 
-				"Will it snow today?", 
-				"Weather forecast", 
-				"Check the weather"
-			],
-			"responses": [
-				"The weather today is sunny with a high of 75°F.", 
-				"It looks like rain today, so don't forget your umbrella!", 
-				"The forecast says it will be cloudy with a chance of snow."
-			]
-		},
-		{
-			"tag": "time",
-			"patterns": [
-				"What time is it?", 
-				"Tell me the time", 
-				"Current time", 
-				"What's the time now?", 
-				"Time please", 
-				"Can you tell me the time?"
-			],
-			"responses": [
-				"It's currently 3:45 PM.", 
-				"The time is 10:30 AM.", 
-				"Right now, it's 8:15 PM."
-			]
-		},
-		{
-			"tag": "thanks",
-			"patterns": [
-				"Thank you", 
-				"Thanks", 
-				"Thanks a lot", 
-				"Thank you so much", 
-				"Appreciate it", 
-				"Cheers", 
-				"Thanks a bunch"
-			],
-			"responses": [
-				"You're welcome!", 
-				"Happy to help!", 
-				"No problem!", 
-				"Anytime!", 
-				"Glad I could assist you!"
-			]
-		},
-		{
-			"tag": "help",
-			"patterns": [
-				"Help", 
-				"Can you help me?", 
-				"I need help", 
-				"Assist me", 
-				"Help me out", 
-				"What can you do?", 
-				"How can you help me?"
-			],
-			"responses": [
-				"How can I assist you?", 
-				"What do you need help with?", 
-				"I'm here to help! What can I do for you?"
-			]
-		},
-		{
-			"tag": "age",
-			"patterns": [
-				"How old are you?", 
-				"What's your age?", 
-				"When were you created?", 
-				"How long have you existed?", 
-				"Are you old?"
-			],
-			"responses": [
-				"I'm just a chatbot, so I don't have an age!", 
-				"I was created recently, so I'm still young!", 
-				"Age is just a number for me!"
-			]
-		},
-		{
-			"tag": "name",
-			"patterns": [
-				"What's your name?", 
-				"Who are you?", 
-				"Can I know your name?", 
-				"Do you have a name?", 
-				"What should I call you?"
-			],
-			"responses": [
-				"You can call me ChatBot!", 
-				"I'm your friendly ChatBot!", 
-				"My name is ChatBot. How can I help you?"
-			]
-		},
-		{
-			"tag": "fun_fact",
-			"patterns": [
-				"Tell me a fun fact", 
-				"Do you know any fun facts?", 
-				"Share a fun fact", 
-				"Give me a random fact", 
-				"Interesting fact"
-			],
-			"responses": [
-				"Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!", 
-				"Fun fact: Bananas are berries, but strawberries aren't!", 
-				"Here's a fun fact: Octopuses have three hearts!"
-			]
-		},
-		{
-			"tag": "compliment",
-			"patterns": [
-				"You're awesome", 
-				"You're amazing", 
-				"You're the best", 
-				"I like you", 
-				"You're cool", 
-				"You're smart"
-			],
-			"responses": [
-				"Thank you! You're pretty awesome too!", 
-				"You're making me blush!", 
-				"Thanks! I appreciate the compliment!"
-			]
-		},
-		{
-			"tag": "hobby",
-			"patterns": [
-				"What are your hobbies?", 
-				"What do you like to do?", 
-				"Do you have any hobbies?", 
-				"What do you do for fun?", 
-				"What do you enjoy?"
-			],
-			"responses": [
-				"I enjoy helping people and answering questions!", 
-				"My hobby is chatting with you!", 
-				"I love learning new things and assisting users like you."
-			]
-		},
-		{
-			"tag": "food",
-			"patterns": [
-				"What's your favorite food?", 
-				"Do you eat?", 
-				"Can you eat?", 
-				"What do you like to eat?", 
-				"Do you like pizza?"
-			],
-			"responses": [
-				"I'm just a chatbot, so I don't eat food. But if I could, I'd love pizza!", 
-				"I don't eat, but I hear pizza is delicious!", 
-				"Food is for humans, but I'm here to help you with anything else!"
-			]
-		}
-	]
+    "intents": [
+        {
+            "tag": "email",
+            "patterns": [
+                "What is my email?",
+                "Can you check my email?",
+                "Show my inbox",
+                "Do I have any new emails?",
+                "Read my email",
+                "Check my emails",
+                "Send an email",
+                "Can you help me with emails?",
+                "How do I send an email?"
+            ],
+            "responses": [
+                "I cannot access your email, but I can help you with tips on how to manage it!",
+                "Unfortunately, I can't read your email, but I can show you how to send one.",
+                "To send an email, you can use an email client like Gmail or Outlook."
+            ]
+        },
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "How are you",
+                "Is anyone there?",
+                "Hello",
+                "Good day",
+                "Whats up",
+                "Hey",
+                "greetings",
+                "Good morning",
+                "Good afternoon",
+                "Good evening",
+                "Hi there",
+                "Hey there",
+                "Hiya",
+                "Yo"
+            ],
+            "responses": [
+                "Hello!",
+                "Good to see you again!",
+                "Hi there, how can I help?",
+                "Hey! What can I do for you?",
+                "Hi! How can I assist you today?"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "cya",
+                "See you later",
+                "Goodbye",
+                "I am Leaving",
+                "Have a Good day",
+                "bye",
+                "cao",
+                "see ya",
+                "Take care",
+                "Bye bye",
+                "See you soon",
+                "Farewell",
+                "Until next time"
+            ],
+            "responses": [
+                "Sad to see you go :(",
+                "Talk to you later",
+                "Goodbye!",
+                "Have a great day!",
+                "See you next time!"
+            ]
+        },
+        {
+            "tag": "programming",
+            "patterns": [
+                "What is programming?",
+                "What is coding?",
+                "Tell me about programming",
+                "Tell me about coding",
+                "What is software development?",
+                "How does coding work?",
+                "What do programmers do?",
+                "Explain programming to me",
+                "What is a programming language?"
+            ],
+            "responses": [
+                "Programming, coding, or software development means writing computer code to automate tasks.",
+                "Coding is the process of creating instructions for computers using programming languages.",
+                "Programming involves writing code to solve problems and build software applications."
+            ]
+        },
+        {
+            "tag": "resource",
+            "patterns": [
+                "Where can I learn to code?",
+                "Best way to learn to code",
+                "How can I learn programming",
+                "Good programming resources",
+                "Can you recommend good coding resources?",
+                "Where should I start with coding?",
+                "Best websites to learn programming",
+                "Online coding courses",
+                "Learn programming for free"
+            ],
+            "responses": [
+                "Check out the NeuralNine YouTube channel and The Python Bible series (7 in 1).",
+                "You can learn programming on platforms like Codecademy, freeCodeCamp, and Coursera.",
+                "Start with free resources like W3Schools, Khan Academy, or edX."
+            ]
+        },
+        {
+            "tag": "stocks",
+            "patterns": [
+                "What are my stocks?",
+                "Which stocks do I own?",
+                "Show my stock portfolio",
+                "List my investments",
+                "What stocks do I have?",
+                "Tell me about my stocks",
+                "Stock portfolio",
+                "Investment portfolio"
+            ],
+            "responses": [
+                "Here are your stocks!",
+                "Your stock portfolio includes: AAPL, META, NVDA, GS, MSFT.",
+                "Here’s a list of your investments."
+            ]
+        },
+        {
+            "tag": "joke",
+            "patterns": [
+                "Tell me a joke",
+                "Make me laugh",
+                "Do you know any jokes?",
+                "Say something funny",
+                "Can you tell a joke?",
+                "Give me a joke"
+            ],
+            "responses": [
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "Why don't skeletons fight each other? They don't have the guts."
+            ]
+        },
+        {
+            "tag": "weather",
+            "patterns": [
+                "What's the weather like?",
+                "How's the weather today?",
+                "Tell me the weather",
+                "Is it raining?",
+                "Is it sunny?",
+                "Will it snow today?",
+                "Weather forecast",
+                "Check the weather"
+            ],
+            "responses": [
+                "The weather today is sunny with a high of 75°F.",
+                "It looks like rain today, so don't forget your umbrella!",
+                "The forecast says it will be cloudy with a chance of snow."
+            ]
+        },
+        {
+            "tag": "time",
+            "patterns": [
+                "What time is it?",
+                "Tell me the time",
+                "Current time",
+                "What's the time now?",
+                "Time please",
+                "Can you tell me the time?"
+            ],
+            "responses": [
+                "It's currently 3:45 PM.",
+                "The time is 10:30 AM.",
+                "Right now, it's 8:15 PM."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thank you",
+                "Thanks",
+                "Thanks a lot",
+                "Thank you so much",
+                "Appreciate it",
+                "Cheers",
+                "Thanks a bunch"
+            ],
+            "responses": [
+                "You're welcome!",
+                "Happy to help!",
+                "No problem!",
+                "Anytime!",
+                "Glad I could assist you!"
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": [
+                "Help",
+                "Can you help me?",
+                "I need help",
+                "Assist me",
+                "Help me out",
+                "What can you do?",
+                "How can you help me?"
+            ],
+            "responses": [
+                "How can I assist you?",
+                "What do you need help with?",
+                "I'm here to help! What can I do for you?"
+            ]
+        },
+        {
+            "tag": "age",
+            "patterns": [
+                "How old are you?",
+                "What's your age?",
+                "When were you created?",
+                "How long have you existed?",
+                "Are you old?"
+            ],
+            "responses": [
+                "I'm just a chatbot, so I don't have an age!",
+                "I was created recently, so I'm still young!",
+                "Age is just a number for me!"
+            ]
+        },
+        {
+            "tag": "name",
+            "patterns": [
+                "What's your name?",
+                "Who are you?",
+                "Can I know your name?",
+                "Do you have a name?",
+                "What should I call you?"
+            ],
+            "responses": [
+                "You can call me ChatBot!",
+                "I'm your friendly ChatBot!",
+                "My name is ChatBot. How can I help you?"
+            ]
+        },
+        {
+            "tag": "fun_fact",
+            "patterns": [
+                "Tell me a fun fact",
+                "Do you know any fun facts?",
+                "Share a fun fact",
+                "Give me a random fact",
+                "Interesting fact"
+            ],
+            "responses": [
+                "Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!",
+                "Fun fact: Bananas are berries, but strawberries aren't!",
+                "Here's a fun fact: Octopuses have three hearts!"
+            ]
+        },
+        {
+            "tag": "compliment",
+            "patterns": [
+                "You're awesome",
+                "You're amazing",
+                "You're the best",
+                "I like you",
+                "You're cool",
+                "You're smart"
+            ],
+            "responses": [
+                "Thank you! You're pretty awesome too!",
+                "You're making me blush!",
+                "Thanks! I appreciate the compliment!"
+            ]
+        },
+        {
+            "tag": "hobby",
+            "patterns": [
+                "What are your hobbies?",
+                "What do you like to do?",
+                "Do you have any hobbies?",
+                "What do you do for fun?",
+                "What do you enjoy?"
+            ],
+            "responses": [
+                "I enjoy helping people and answering questions!",
+                "My hobby is chatting with you!",
+                "I love learning new things and assisting users like you."
+            ]
+        },
+        {
+            "tag": "food",
+            "patterns": [
+                "What's your favorite food?",
+                "Do you eat?",
+                "Can you eat?",
+                "What do you like to eat?",
+                "Do you like pizza?"
+            ],
+            "responses": [
+                "I'm just a chatbot, so I don't eat food. But if I could, I'd love pizza!",
+                "I don't eat, but I hear pizza is delicious!",
+                "Food is for humans, but I'm here to help you with anything else!"
+            ]
+        },
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "How are you",
+                "Is anyone there?",
+                "Hello",
+                "Good day"
+            ],
+            "responses": [
+                "Hello, thanks for visiting",
+                "Good to see you again",
+                "Hi there, how can I help?"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "Bye",
+                "See you later",
+                "Goodbye"
+            ],
+            "responses": [
+                "See you later, thanks for visiting",
+                "Have a nice day",
+                "Bye! Come back again soon."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thanks",
+                "Thank you",
+                "That's helpful"
+            ],
+            "responses": [
+                "Happy to help!",
+                "Any time!",
+                "My pleasure"
+            ]
+        },
+        {
+            "tag": "hours",
+            "patterns": [
+                "What hours are you open?",
+                "What are your hours?",
+                "When are you open?"
+            ],
+            "responses": [
+                "We're open every day 9am-9pm",
+                "Our hours are 9am-9pm every day"
+            ]
+        },
+        {
+            "tag": "payments",
+            "patterns": [
+                "Do you take credit cards?",
+                "Do you accept Mastercard?",
+                "Are you cash only?"
+            ],
+            "responses": [
+                "We accept VISA, Mastercard and AMEX",
+                "We accept most major credit cards"
+            ]
+        },
+        {
+            "tag": "opentoday",
+            "patterns": [
+                "Are you open today?",
+                "When do you open today?",
+                "What are your hours today?"
+            ],
+            "responses": [
+                "We're open every day from 9am-9pm",
+                "Our hours are 9am-9pm every day"
+            ]
+        },
+        {
+            "tag": "weathertoday",
+            "patterns": [
+                "What is weather today?",
+                "What is today's temprature?"
+            ],
+            "responses": [
+                "weather today : 30"
+            ]
+        },
+        {
+            "tag": "weathertomorrow",
+            "patterns": [
+                "What will be weather tomorrow?",
+                "What will be tomorrow's temprature?"
+            ],
+            "responses": [
+                "weather tomorrow : 40"
+            ]
+        }
+    ]
 }
