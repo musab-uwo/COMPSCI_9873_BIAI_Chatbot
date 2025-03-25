@@ -137,7 +137,6 @@ class ChatbotAssistant:
     def process_message(self, input_message):
         words = self.tokenize_and_lemmatize(input_message)
         bag = self.bag_of_words(words)
-
         bag_tensor = torch.tensor([bag], dtype=torch.float32)
 
         self.model.eval()
@@ -147,14 +146,24 @@ class ChatbotAssistant:
         predicted_class_index = torch.argmax(predictions, dim=1).item()
         predicted_intent = self.intents[predicted_class_index]
 
-        if self.function_mappings:
-            if predicted_intent in self.function_mappings:
-                self.function_mappings[predicted_intent]()
+        # Get confidence score
+        probs = torch.softmax(predictions, dim=1)
+        confidence = probs[0][predicted_class_index].item()
 
-        if self.intents_responses[predicted_intent]:
-            return random.choice(self.intents_responses[predicted_intent])
-        else:
-            return None
+        # Only process if confidence is above threshold
+        if confidence > 0.5:
+            # Handle function mappings
+            if self.function_mappings and predicted_intent in self.function_mappings:
+                result = self.function_mappings[predicted_intent]()
+                if result:
+                    return f"Here are your stocks: {', '.join(result)}"
+
+            # Return random response for the predicted intent
+            if predicted_intent in self.intents_responses:
+                return random.choice(self.intents_responses[predicted_intent])
+
+        # Fallback response if confidence is low or no response found
+        return "I'm sorry, I don't understand that."
 
 
 def get_stocks():
