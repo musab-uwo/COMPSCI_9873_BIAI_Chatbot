@@ -38,9 +38,12 @@
         }
         .btn-clear {
             margin-top: 10px;
-            width: 100%;
+            font-size: 14px;
+            padding: 5px 10px;
         }
     </style>
+    <!-- Font Awesome for the Trash Icon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
@@ -51,7 +54,12 @@
                 <input type="text" id="message" class="form-control" placeholder="Type your message here...">
                 <button class="btn btn-primary" onclick="sendMessage()">Send</button>
             </div>
-            <button class="btn btn-danger btn-clear" onclick="clearChat()">Clear Chat</button>
+            <!-- Small Clear Chat Button with Trash Icon Below Send Button -->
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-danger btn-sm btn-clear" onclick="clearChat()">
+                    <i class="fas fa-trash"></i> Clear Chat
+                </button>
+            </div>
         </div>
     </div>
 
