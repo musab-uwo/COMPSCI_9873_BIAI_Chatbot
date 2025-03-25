@@ -20,6 +20,38 @@
             ]
         },
         {
+            "tag": "available",
+            "patterns": [
+                "Are you available to work from 9 AM to 5 PM?",
+                "Can you work during office hours (9 AM - 5 PM)?",
+                "Are you available between 9 AM and 5 PM?",
+                "Can you take calls from 9 to 5?",
+                "Is your working time 9 AM to 5 PM?"
+            ],
+            "responses": [
+                "Yes",
+                "Yes, I am available during these hours.",
+                "Yes, you can reach me between 9 AM and 5 PM.",
+                "Yes, I am working during this time."
+            ]
+        },
+        {
+            "tag": "not_available",
+            "patterns": [
+                "Are you available to work from 5 AM to 9 PM?",
+                "Can you work before 9 AM or after 5 PM?",
+                "Are you free outside of 9 AM - 5 PM?",
+                "Can you take calls at night or early morning?",
+                "Is your working time outside 9 AM to 5 PM?"
+            ],
+            "responses": [
+                "No",
+                "No, I am only available from 9 AM to 5 PM.",
+                "No, I don't work outside these hours.",
+                "No, my working hours are 9 AM - 5 PM."
+            ]
+        },
+        {
             "tag": "greeting",
             "patterns": [
                 "Hi",
