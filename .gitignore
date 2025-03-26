@@ -3,3 +3,5 @@ nodejs-frontend/node_modules/
 
 # Ignore the BERT model directory
 bert_model/
+
+*.pth
