@@ -21,16 +21,50 @@ nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('punkt_tab', quiet=True)
 
-# Define the get_stocks function FIRST
 def get_stocks():
     """Sample function to return random stocks"""
     stocks = ['AAPL', 'META', 'NVDA', 'GS', 'MSFT']
     return random.sample(stocks, 3)
 
+class ChatbotModel(nn.Module):
+    def __init__(self, input_size, output_size):
+        super().__init__()
+        self.fc1 = nn.Linear(input_size, 128)
+        self.fc2 = nn.Linear(128, 64)
+        self.fc3 = nn.Linear(64, output_size)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(0.5)
+
+    def forward(self, x):
+        x = self.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.relu(self.fc2(x))
+        x = self.dropout(x)
+        return self.fc3(x)
+
+class IntentDataset(Dataset):
+    def __init__(self, texts, labels, tokenizer, max_length=128):
+        self.texts = texts
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.max_length = max_length
+        
+    def __len__(self):
+        return len(self.texts)
+    
+    def __getitem__(self, idx):
+        text = self.texts[idx]
+        inputs = self.tokenizer(
+            text,
+            truncation=True,
+            padding='max_length',
+            max_length=self.max_length,
+            return_tensors='pt'
+        )
+        return {k: v.squeeze(0) for k, v in inputs.items()}, torch.tensor(self.labels[idx])
+
 class ChatbotAssistant:
     def __init__(self, intents_path, function_mappings=None):
-         # This will now work because get_stocks is defined above
-        self.function_mappings = function_mappings or {}
         self.bow_model = None
         self.bert_model = None
         self.tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
@@ -44,6 +78,7 @@ class ChatbotAssistant:
         self.y = None
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.initialize_bert_model()
+        self.confidence_threshold = 0.5  # 50% threshold
 
     def initialize_bert_model(self):
         """Initialize BERT model with proper configuration"""
@@ -142,7 +177,6 @@ class ChatbotAssistant:
             print("Not enough distinct labels for BERT training")
             return
             
-        # Calculate class weights
         class_weights = compute_class_weight(
             'balanced',
             classes=np.unique(labels),
@@ -151,14 +185,12 @@ class ChatbotAssistant:
         weights = torch.tensor(class_weights, dtype=torch.float).to(self.device)
         criterion = nn.CrossEntropyLoss(weight=weights)
         
-        # Initialize model
         self.bert_model = DistilBertForSequenceClassification.from_pretrained(
             'distilbert-base-uncased',
             num_labels=len(self.intents),
             problem_type="single_label_classification"
         ).to(self.device)
         
-        # Create dataset with augmentation
         augmented_texts = []
         augmented_labels = []
         for text, label in zip(texts, labels):
@@ -170,13 +202,11 @@ class ChatbotAssistant:
         dataset = IntentDataset(augmented_texts, augmented_labels, self.tokenizer)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
         
-        # Optimizer with weight decay
         optimizer = AdamW(self.bert_model.parameters(), 
                          lr=3e-5,
                          eps=1e-8,
                          weight_decay=0.01)
         
-        # Scheduler with warmup
         total_steps = len(dataloader) * epochs
         scheduler = get_linear_schedule_with_warmup(
             optimizer,
@@ -184,7 +214,6 @@ class ChatbotAssistant:
             num_training_steps=total_steps
         )
         
-        # Training loop
         best_loss = float('inf')
         patience = 2
         patience_counter = 0
@@ -208,7 +237,6 @@ class ChatbotAssistant:
             avg_loss = total_loss / len(dataloader)
             print(f"BERT - Epoch {epoch + 1}: Loss: {avg_loss:.4f}")
             
-            # Early stopping
             if avg_loss < best_loss:
                 best_loss = avg_loss
                 patience_counter = 0
@@ -218,7 +246,7 @@ class ChatbotAssistant:
                     print("Early stopping")
                     break
 
-    def predict_with_bert(self, text, temperature=0.7, min_confidence=0.4):
+    def predict_with_bert(self, text, temperature=0.7):
         if not self.bert_model or not text.strip():
             return None, 0
             
@@ -237,9 +265,6 @@ class ChatbotAssistant:
                 probs = torch.softmax(logits, dim=1)
                 confidence, pred_idx = torch.max(probs, dim=1)
                 confidence = confidence.item()
-                
-                if confidence < min_confidence:
-                    return None, 0
                     
                 return self.intents[pred_idx.item()], confidence
                 
@@ -272,19 +297,20 @@ class ChatbotAssistant:
         print(f"BERT: '{bert_intent or 'N/A'}' ({bert_confidence:.2%})")
         print(f"BOW: '{bow_intent}' ({bow_confidence:.2%})")
         
-        if bert_intent and (bert_confidence > max(bow_confidence, 0.5) or bow_confidence < 0.5):
+        # Decision logic with 50% threshold
+        if bert_confidence and bert_confidence >= self.confidence_threshold:
             intent, confidence, model = bert_intent, bert_confidence, "BERT"
         else:
             intent, confidence, model = bow_intent, bow_confidence, "BOW"
         
         print(f"Using {model} model. Final: {intent} ({confidence:.2%})")
         
-        if confidence > 0.5 and self.function_mappings and intent in self.function_mappings:
+        if confidence > self.confidence_threshold and self.function_mappings and intent in self.function_mappings:
             result = self.function_mappings[intent]()
             if result:
                 return f"Here are your stocks: {', '.join(result)}"
         
-        if confidence > 0.5 and intent in self.intents_responses:
+        if confidence > self.confidence_threshold and intent in self.intents_responses:
             return random.choice(self.intents_responses[intent])
         return "I'm sorry, I don't understand that."
 
@@ -325,43 +351,6 @@ class ChatbotAssistant:
         except Exception as e:
             print(f"Error loading models: {str(e)}")
             self.initialize_bert_model()
-
-class ChatbotModel(nn.Module):
-    def __init__(self, input_size, output_size):
-        super().__init__()
-        self.fc1 = nn.Linear(input_size, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, output_size)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.5)
-
-    def forward(self, x):
-        x = self.relu(self.fc1(x))
-        x = self.dropout(x)
-        x = self.relu(self.fc2(x))
-        x = self.dropout(x)
-        return self.fc3(x)
-
-class IntentDataset(Dataset):
-    def __init__(self, texts, labels, tokenizer, max_length=128):
-        self.texts = texts
-        self.labels = labels
-        self.tokenizer = tokenizer
-        self.max_length = max_length
-        
-    def __len__(self):
-        return len(self.texts)
-    
-    def __getitem__(self, idx):
-        text = self.texts[idx]
-        inputs = self.tokenizer(
-            text,
-            truncation=True,
-            padding='max_length',
-            max_length=self.max_length,
-            return_tensors='pt'
-        )
-        return {k: v.squeeze(0) for k, v in inputs.items()}, torch.tensor(self.labels[idx])
 
 # Flask App Setup
 app = Flask(__name__)
